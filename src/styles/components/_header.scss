@@ -1,0 +1,30 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    margin: 2% 2%;
+
+    .logo {
+        width: 100%;
+        height: 150px;
+    }
+
+    .navigation {
+        width: 44%;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+
+        .nav-active {
+            text-decoration: none;
+            color: $primary-color;
+            border-bottom: $primary-color solid;
+            margin-bottom: -2%;
+        }
+
+        .nav {
+            text-decoration: none;
+            color: $primary-color;
+        }
+
+    }
+}
