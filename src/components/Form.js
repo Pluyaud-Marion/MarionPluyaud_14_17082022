@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import stateData from '../data/stateData';
 import departmentData from '../data/departmentData';
 import { useDispatch } from 'react-redux';
-import { setEmployee } from '../feature/employee.slice';
+import { addEmployee } from '../feature/employee.slice';
 
 
 
@@ -33,7 +33,7 @@ const Form = () => {
 
     const submitCreateEmployee = (e) => {
         e.preventDefault()
-        dispatch(setEmployee(newEmployee))
+        dispatch(addEmployee(newEmployee))
     }
 
 
