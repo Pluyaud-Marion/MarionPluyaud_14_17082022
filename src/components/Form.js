@@ -5,8 +5,6 @@ import { useDispatch } from 'react-redux';
 import { addEmployee } from '../feature/employee.slice';
 import { Modal } from 'library-modal';
 
-
-
 const Form = () => {
     const dispatch = useDispatch();
 
@@ -21,7 +19,7 @@ const Form = () => {
     const [department, setDepartment] = useState("")
 
     const [show, setShow] = useState(false)
-
+    const [createOk, setCreateOk] = useState(false) //création de l'employé à eu lieu
 
     const newEmployee = {
         firstname,
@@ -35,10 +33,24 @@ const Form = () => {
         department
     }
 
+    // à l'envoi du formulaire, si un des champs est vide => création de l'employé n'a pas eu lieu = passage du state de createOk sur false et passage du state de setShow sur true
     const submitCreateEmployee = (e) => {
-        e.preventDefault()
-        dispatch(addEmployee(newEmployee))
-        setShow(true) // au click sur créer employé -> passe state à true = affiche la modale (dans conditions du return)
+        if (newEmployee.firstname.length === 0 || newEmployee.lastname.length === 0 || newEmployee.dateOfBirth.length === 0 || newEmployee.startDate.length === 0 || newEmployee.street.length === 0 || newEmployee.city.length === 0 || newEmployee.state.length === 0 || newEmployee.zipCode.length === 0 || newEmployee.department.length === 0) {
+            setCreateOk(false)
+            setShow(true)
+
+            // à l'envoi du formulaire, si tous les champs sont remplis = 
+            //-passage du state de createOk sur true
+            //-passage du state de setShow sur true 
+            //-reset du formulaire
+            //-envoi dans redux du nouveel
+        } else {
+            setCreateOk(true)
+            e.preventDefault()
+            dispatch(addEmployee(newEmployee))
+            setShow(true) // au click sur créer employé -> passe state à true = affiche la modale (dans conditions du return)
+            document.form.reset()
+        }
     }
 
 
@@ -51,7 +63,7 @@ const Form = () => {
 
     return (
         <div className='Form'>
-            <form action="" className='formulaire'>
+            <form action="" className='formulaire' name='form'>
                 <label htmlFor="first-name">First Name</label>
                 <input onChange={(e) => setFirstname(e.target.value)} type="text" id="first-name" required />
                 <label htmlFor="last-name">Last Name</label>
@@ -83,7 +95,10 @@ const Form = () => {
                 </select>
             </form>
             <button onClick={submitCreateEmployee} className='button-save'>Save</button>
-            {show && <Modal contentModal="Employee Created!" hide={hide} />}
+            {/* si state show est sur true + que state createOk est sur false -> affiche la modale avec message d'erreur */}
+            {show && !createOk && <Modal contentModal="You must complete all the fields!" hide={hide} />}
+            {/* si state show est sur true + que state createOk est sur true -> affiche la modale avec message de réussite */}
+            {show && createOk && <Modal contentModal="Employee Created!" hide={hide} />}
         </div >
     );
 };
