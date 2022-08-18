@@ -3,7 +3,7 @@ import stateData from '../data/stateData';
 import departmentData from '../data/departmentData';
 import { useDispatch } from 'react-redux';
 import { addEmployee } from '../feature/employee.slice';
-import { Modale } from "library-modale";
+import { Modal } from 'library-modal';
 
 
 
@@ -20,6 +20,9 @@ const Form = () => {
     const [zipCode, setZipCode] = useState(0)
     const [department, setDepartment] = useState("")
 
+    const [show, setShow] = useState(false)
+
+
     const newEmployee = {
         firstname,
         lastname,
@@ -35,9 +38,14 @@ const Form = () => {
     const submitCreateEmployee = (e) => {
         e.preventDefault()
         dispatch(addEmployee(newEmployee))
-
+        setShow(true) // au click sur créer employé -> passe state à true = affiche la modale (dans conditions du return)
     }
 
+
+    // fonction appelée au click sur la croix de la modale
+    function hide() {
+        setShow(false)
+    }
 
 
 
@@ -75,7 +83,7 @@ const Form = () => {
                 </select>
             </form>
             <button onClick={submitCreateEmployee} className='button-save'>Save</button>
-            <Modale contentModal="Employee Created!" show={false} />
+            {show && <Modal contentModal="Employee Created!" hide={hide} />}
         </div >
     );
 };
