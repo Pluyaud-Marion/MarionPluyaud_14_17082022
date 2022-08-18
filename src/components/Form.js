@@ -3,6 +3,7 @@ import stateData from '../data/stateData';
 import departmentData from '../data/departmentData';
 import { useDispatch } from 'react-redux';
 import { addEmployee } from '../feature/employee.slice';
+import { Modale } from "library-modale";
 
 
 
@@ -34,6 +35,7 @@ const Form = () => {
     const submitCreateEmployee = (e) => {
         e.preventDefault()
         dispatch(addEmployee(newEmployee))
+
     }
 
 
@@ -73,6 +75,7 @@ const Form = () => {
                 </select>
             </form>
             <button onClick={submitCreateEmployee} className='button-save'>Save</button>
+            <Modale contentModal="Employee Created!" show={false} />
         </div >
     );
 };

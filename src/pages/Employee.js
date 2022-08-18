@@ -6,8 +6,8 @@ const Employee = () => {
 
     return (
         <div>
-            {listOfEmployees.map(employee => (
-                <div>
+            {listOfEmployees.map((employee, index) => (
+                <div key={index}>
                     <h1>{employee?.firstname}</h1>
                     <h1>{employee?.lastname}</h1>
                     <h1>{employee?.dateOfBirth}</h1>
