@@ -2,6 +2,7 @@
  * Mocked datas
  */
 const stateData = [
+    { label: '', name: 'Select your state' },
     { label: 'AL', name: 'Alabama' },
     { label: 'AK', name: 'Alaska' },
     { label: 'AS', name: 'American Samoa' },

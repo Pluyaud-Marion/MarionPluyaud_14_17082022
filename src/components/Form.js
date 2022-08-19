@@ -7,6 +7,7 @@ import { Modal } from 'library-modal';
 
 /**
  * form component for create a new employee and add data in redux
+ * Use library for modal = library-modal
  * @returns {JSX} - React component
  */
 const Form = () => {
