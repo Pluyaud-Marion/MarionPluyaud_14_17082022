@@ -1,3 +1,6 @@
+/**
+ * Mocked datas
+ */
 const stateData = [
     { label: 'AL', name: 'Alabama' },
     { label: 'AK', name: 'Alaska' },

@@ -1,6 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from "../assets/logo.png"
+
+/**
+ * Header component call in header
+ * Add the navigation between page Home (create employee) and page Employee (view employees)
+ * @returns {JSX} - React component
+ */
 const Header = () => {
     return (
         <div className='Header'>

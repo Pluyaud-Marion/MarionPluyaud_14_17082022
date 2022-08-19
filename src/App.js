@@ -5,6 +5,7 @@ import Employee from "./pages/Employee"
 import Header from "./components/Header"
 import Footer from "./components/Footer";
 
+//router
 function App() {
   return (
     <BrowserRouter>

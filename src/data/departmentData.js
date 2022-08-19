@@ -1,3 +1,6 @@
+/**
+ * Mocked datas
+ */
 const departments = [
     { label: 'Sales', name: 'Sales' },
     { label: 'Marketing', name: 'Marketing' },

@@ -1,3 +1,6 @@
+/**
+ * Mocked datas
+ */
 const labelsData = [
     { text: "First Name", value: "firstName" },
     { text: "Last Name", value: "lastName" },

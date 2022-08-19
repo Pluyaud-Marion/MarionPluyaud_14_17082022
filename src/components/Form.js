@@ -5,9 +5,16 @@ import { useDispatch } from 'react-redux';
 import { addEmployee } from '../feature/employee.slice';
 import { Modal } from 'library-modal';
 
+/**
+ * form component for create a new employee and add data in redux
+ * @returns {JSX} - React component
+ */
 const Form = () => {
     const dispatch = useDispatch();
 
+    /**
+     * state for each field of the form -> define empty and update onChange on field with the set
+     */
     const [firstname, setFirstname] = useState("")
     const [lastname, setLastname] = useState("")
     const [dateOfBirth, setDateOfBirth] = useState("")
@@ -21,6 +28,9 @@ const Form = () => {
     const [show, setShow] = useState(false)
     const [createOk, setCreateOk] = useState(false) //création de l'employé à eu lieu
 
+    /**
+     * Object newEmployee with all fields (get onChange in each fields, with the state)
+     */
     const newEmployee = {
         firstname,
         lastname,
@@ -34,6 +44,12 @@ const Form = () => {
     }
 
     // à l'envoi du formulaire, si un des champs est vide => création de l'employé n'a pas eu lieu = passage du state de createOk sur false et passage du state de setShow sur true
+    /**
+     * 
+     * function call onClick the submit button
+     * If one field is empty -> update state createOk on false (=for show modal with props : "have to complete all fields") + update state Show on true 
+     * If all fields is complete -> update state createOk on true (=for show modal with props : "employee is create") + update state Show on true + use dispatch for add employee in redux
+     */
     const submitCreateEmployee = (e) => {
         if (newEmployee.firstname.length === 0 || newEmployee.lastname.length === 0 || newEmployee.dateOfBirth.length === 0 || newEmployee.startDate.length === 0 || newEmployee.street.length === 0 || newEmployee.city.length === 0 || newEmployee.state.length === 0 || newEmployee.zipCode.length === 0 || newEmployee.department.length === 0) {
             setCreateOk(false)
@@ -55,11 +71,12 @@ const Form = () => {
 
 
     // fonction appelée au click sur la croix de la modale
+    /**
+     * Function call onClick for close the modal (change the state Show on false for hide the modal)
+     */
     function hide() {
         setShow(false)
     }
-
-
 
     return (
         <div className='Form'>
@@ -96,8 +113,10 @@ const Form = () => {
             </form>
             <button onClick={submitCreateEmployee} className='button-save'>Save</button>
             {/* si state show est sur true + que state createOk est sur false -> affiche la modale avec message d'erreur */}
+            {/* If state Show is true and state CreateOk is false = one field is incomplete => show the modal with error message */}
             {show && !createOk && <Modal contentModal="You must complete all the fields!" hide={hide} />}
             {/* si state show est sur true + que state createOk est sur true -> affiche la modale avec message de réussite */}
+            {/* If state Show is true and state CreateOk is true = all fields is ok => show the modal with success message */}
             {show && createOk && <Modal contentModal="Employee Created!" hide={hide} />}
         </div >
     );

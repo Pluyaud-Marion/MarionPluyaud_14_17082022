@@ -5,6 +5,7 @@ import "./styles/_index.scss"
 import App from './App';
 import store from "./app/store"
 
+//use React 17
 ReactDOM.render(
   <Provider store={store}>
     <App />
