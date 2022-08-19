@@ -1,12 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Table from '../components/Table';
+
 
 const Employee = () => {
     const listOfEmployees = useSelector((state) => state?.employee?.listOfEmployees)
 
     return (
         <div>
-            {listOfEmployees.map((employee, index) => (
+            <Table listOfEmployees={listOfEmployees} />
+            {/* {listOfEmployees.map((employee, index) => (
                 <div key={index}>
                     <h1>{employee?.firstname}</h1>
                     <h1>{employee?.lastname}</h1>
@@ -19,7 +22,8 @@ const Employee = () => {
                     <h1>{employee?.department}</h1>
                 </div>
             ))
-            }
+            } */}
+
         </div>
     );
 };

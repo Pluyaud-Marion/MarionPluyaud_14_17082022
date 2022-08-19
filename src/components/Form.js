@@ -24,13 +24,13 @@ const Form = () => {
     const newEmployee = {
         firstname,
         lastname,
-        dateOfBirth,
         startDate,
+        department,
+        dateOfBirth,
         street,
         city,
         state,
         zipCode,
-        department
     }
 
     // à l'envoi du formulaire, si un des champs est vide => création de l'employé n'a pas eu lieu = passage du state de createOk sur false et passage du state de setShow sur true
@@ -64,10 +64,10 @@ const Form = () => {
     return (
         <div className='Form'>
             <form action="" className='formulaire' name='form'>
-                <label htmlFor="first-name">First Name</label>
-                <input onChange={(e) => setFirstname(e.target.value)} type="text" id="first-name" required />
-                <label htmlFor="last-name">Last Name</label>
-                <input onChange={(e) => setLastname(e.target.value)} type="text" id="last-name" required />
+                <label htmlFor="firstName">First Name</label>
+                <input onChange={(e) => setFirstname(e.target.value)} type="text" id="firstName" required />
+                <label htmlFor="lastName">Last Name</label>
+                <input onChange={(e) => setLastname(e.target.value)} type="text" id="lastName" required />
                 <label htmlFor="date-of-birth">Date of Birth</label>
                 <input onChange={(e) => setDateOfBirth(e.target.value)} type="date" id='date-of-birth' required />
                 <label htmlFor="start-date">Start Date</label>
