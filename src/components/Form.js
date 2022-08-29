@@ -107,7 +107,7 @@ const Form = () => {
                     <input onChange={(e) => setStreet(e.target.value)} type="text" id="street" required />
                     <label htmlFor="city">City</label>
                     <input onChange={(e) => setCity(e.target.value)} type="text" id="city" required />
-                    <label htmlFor='state-button'>State</label>
+                    <label htmlFor='state'>State</label>
                     <select onChange={(e) => setState(e.target.value)} name='state' id='state' required>
                         {stateData.map(state => (
                             <option value={state?.label} key={state?.label} > {state?.name}</option>

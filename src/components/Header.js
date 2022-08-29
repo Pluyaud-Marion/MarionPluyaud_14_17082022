@@ -9,7 +9,7 @@ import logo from "../assets/logo.png"
  */
 const Header = () => {
     return (
-        <div className='Header'>
+        <header className='Header'>
             <NavLink to="/" >
                 <img src={logo} className="logo" alt="HRnet logo" />
             </NavLink>
@@ -18,7 +18,7 @@ const Header = () => {
                 <NavLink to={"/employee"} className={(nav) => (nav.isActive ? 'nav-active' : 'nav')}>View Current Employees</NavLink>
             </div>
 
-        </div>
+        </header>
     );
 };
 
