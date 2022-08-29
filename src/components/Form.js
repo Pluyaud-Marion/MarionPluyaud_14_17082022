@@ -51,11 +51,22 @@ const Form = () => {
      * If one field is empty -> update state createOk on false (=for show modal with props : "have to complete all fields") + update state Show on true 
      * If all fields is complete -> update state createOk on true (=for show modal with props : "employee is create") + update state Show on true + use dispatch for add employee in redux
      */
+
     const submitCreateEmployee = (e) => {
-        if (newEmployee.firstname.length === 0 || newEmployee.lastname.length === 0 || newEmployee.dateOfBirth.length === 0 || newEmployee.startDate.length === 0 || newEmployee.street.length === 0 || newEmployee.city.length === 0 || newEmployee.state.length === 0 || newEmployee.zipCode.length === 0 || newEmployee.department.length === 0) {
+        const inputFirstname = document.querySelector("#firstName").value
+        const inputLastname = document.querySelector("#lastName").value
+        const inputBirthday = document.querySelector("#date-of-birth").value
+        const inputStartDate = document.querySelector("#start-date").value
+        const inputStreet = document.querySelector("#street").value
+        const inputCity = document.querySelector("#city").value
+        const inputState = document.querySelector("#state").value
+        const inputZipCode = document.querySelector("#zip-code").value
+        const inputDepartment = document.querySelector("#department").value
+
+
+        if (!inputFirstname || !inputLastname || !inputBirthday || !inputStartDate || !inputStreet || !inputCity || !inputState || !inputZipCode || !inputDepartment) {
             setCreateOk(false)
             setShow(true)
-
             // à l'envoi du formulaire, si tous les champs sont remplis = 
             //-passage du state de createOk sur true
             //-passage du state de setShow sur true 
