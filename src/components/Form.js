@@ -63,7 +63,8 @@ const Form = () => {
         const inputZipCode = document.querySelector("#zip-code").value
         const inputDepartment = document.querySelector("#department").value
 
-
+        console.log(inputDepartment);
+        console.log(inputState);
         if (!inputFirstname || !inputLastname || !inputBirthday || !inputStartDate || !inputStreet || !inputCity || !inputState || !inputZipCode || !inputDepartment) {
             setCreateOk(false)
             setShow(true)
