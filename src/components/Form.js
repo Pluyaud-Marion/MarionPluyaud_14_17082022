@@ -27,7 +27,7 @@ const Form = () => {
     const [department, setDepartment] = useState("")
 
     const [show, setShow] = useState(false)
-    const [createOk, setCreateOk] = useState(false) //création de l'employé à eu lieu
+    const [created, setCreated] = useState(false) //création de l'employé à eu lieu
 
     /**
      * Object newEmployee with all fields (get onChange in each fields, with the state)
@@ -53,7 +53,6 @@ const Form = () => {
         const year = parseInt(date[0]);
         const month = parseInt(date[1]);
         const day = parseInt(date[2]);
-
         const dateCurrent = new Date();
         const yearCurrent = dateCurrent.getFullYear();
         const monthCurrent = dateCurrent.getMonth() + 1;
@@ -70,8 +69,6 @@ const Form = () => {
         } else {
             document.querySelector(".error-date").innerHTML = "This employee is too young, there is an error in the date"
         }
-
-
         if (year < yearCurrent) {
             if (age < 18) {
                 document.querySelector(".error-date").innerHTML = "This employee is too young, there is an error in the date"
@@ -83,14 +80,12 @@ const Form = () => {
             }
         }
     }
-    // à l'envoi du formulaire, si un des champs est vide => création de l'employé n'a pas eu lieu = passage du state de createOk sur false et passage du state de setShow sur true
-    /**
-     * 
-     * function call onClick the submit button
-     * If one field is empty -> update state createOk on false (=for show modal with props : "have to complete all fields") + update state Show on true 
-     * If all fields is complete -> update state createOk on true (=for show modal with props : "employee is create") + update state Show on true + use dispatch for add employee in redux
-     */
 
+    /**
+     * function call onClick the submit button
+     * If one field is empty -> update state created on false (=for show modal with props : "have to complete all fields") + update state Show on true 
+     * If all fields is complete -> update state created on true (=for show modal with props : "employee is create") + update state Show on true + use dispatch for add employee in redux
+     */
     const submitCreateEmployee = (e) => {
         const inputFirstname = document.querySelector("#firstName").value
         const inputLastname = document.querySelector("#lastName").value
@@ -102,18 +97,12 @@ const Form = () => {
         const inputZipCode = document.querySelector("#zip-code").value
         const inputDepartment = document.querySelector("#department").value
 
-
         if (!inputFirstname || !inputLastname || !inputBirthday || !inputStartDate || !inputStreet || !inputCity || !inputState || !inputZipCode || !inputDepartment || !checkDate()) {
-            setCreateOk(false)
+            setCreated(false)
             setShow(true)
-            // à l'envoi du formulaire, si tous les champs sont remplis = 
-            //-passage du state de createOk sur true
-            //-passage du state de setShow sur true 
-            //-reset du formulaire
-            //-envoi dans redux du nouveel
-        } else if (inputFirstname && inputLastname && inputBirthday && inputStartDate && inputStreet && inputCity && inputState && inputZipCode && inputDepartment && checkDate()) {
 
-            setCreateOk(true)
+        } else if (inputFirstname && inputLastname && inputBirthday && inputStartDate && inputStreet && inputCity && inputState && inputZipCode && inputDepartment && checkDate()) {
+            setCreated(true)
             e.preventDefault()
             dispatch(addEmployee(newEmployee))
             setShow(true) // au click sur créer employé -> passe state à true = affiche la modale (dans conditions du return)
@@ -121,8 +110,6 @@ const Form = () => {
         }
     }
 
-
-    // fonction appelée au click sur la croix de la modale
     /**
      * Function call onClick for close the modal (change the state Show on false for hide the modal)
      */
@@ -165,12 +152,10 @@ const Form = () => {
                 </select>
             </form>
             <button onClick={submitCreateEmployee} className='button-save'>Save</button>
-            {/* si state show est sur true + que state createOk est sur false -> affiche la modale avec message d'erreur */}
             {/* If state Show is true and state CreateOk is false = one field is incomplete => show the modal with error message */}
-            {show && !createOk && <Modal contentModal="You must complete all the fields!" hide={hide} />}
-            {/* si state show est sur true + que state createOk est sur true -> affiche la modale avec message de réussite */}
+            {show && !created && <Modal contentModal="You must complete all the fields!" hide={hide} />}
             {/* If state Show is true and state CreateOk is true = all fields is ok => show the modal with success message */}
-            {show && createOk && <Modal contentModal="Employee Created!" hide={hide} />}
+            {show && created && <Modal contentModal="Employee Created!" hide={hide} />}
         </div >
     );
 };
