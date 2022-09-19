@@ -44,6 +44,9 @@ const Form = () => {
         zipCode,
     }
 
+    /**
+     * Function called on change in input birthdate, for verify date (existing date + age between 18 and 70 years old)
+     */
     const checkDate = () => {
         const inputBirthday = document.querySelector("#date-of-birth").value
         const date = inputBirthday.split("-")
@@ -59,11 +62,11 @@ const Form = () => {
         const age = yearCurrent - year;
 
         if (year > yearCurrent) {
-            document.querySelector(".error-date").innerHTML = "This date doesn't exist, there is an error"
+            document.querySelector(".error-date").innerHTML = "This date isn't possible, there is an error"
         } else if (yearCurrent === year && month > monthCurrent) {
-            document.querySelector(".error-date").innerHTML = "This date doesn't exist, there is an error"
+            document.querySelector(".error-date").innerHTML = "This date isn't possible, there is an error"
         } else if (yearCurrent === year && month === monthCurrent && day > dayCurrent) {
-            document.querySelector(".error-date").innerHTML = "This date doesn't exist, there is an error"
+            document.querySelector(".error-date").innerHTML = "This date isn't possible, there is an error"
         } else {
             document.querySelector(".error-date").innerHTML = "This employee is too young, there is an error in the date"
         }
@@ -100,7 +103,7 @@ const Form = () => {
         const inputDepartment = document.querySelector("#department").value
 
 
-        if (!inputFirstname || !inputLastname || !inputBirthday || !inputStartDate || !inputStreet || !inputCity || !inputState || !inputZipCode || !inputDepartment) {
+        if (!inputFirstname || !inputLastname || !inputBirthday || !inputStartDate || !inputStreet || !inputCity || !inputState || !inputZipCode || !inputDepartment || !checkDate()) {
             setCreateOk(false)
             setShow(true)
             // à l'envoi du formulaire, si tous les champs sont remplis = 
@@ -108,7 +111,8 @@ const Form = () => {
             //-passage du state de setShow sur true 
             //-reset du formulaire
             //-envoi dans redux du nouveel
-        } else {
+        } else if (inputFirstname && inputLastname && inputBirthday && inputStartDate && inputStreet && inputCity && inputState && inputZipCode && inputDepartment && checkDate()) {
+
             setCreateOk(true)
             e.preventDefault()
             dispatch(addEmployee(newEmployee))
