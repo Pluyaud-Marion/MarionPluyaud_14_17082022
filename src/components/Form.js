@@ -153,7 +153,7 @@ const Form = () => {
             </form>
             <button onClick={submitCreateEmployee} className='button-save'>Save</button>
             {/* If state Show is true and state CreateOk is false = one field is incomplete => show the modal with error message */}
-            {show && !created && <Modal contentModal="You must complete all the fields!" hide={hide} />}
+            {show && !created && <Modal contentModal="You must complete all fields correctly !" hide={hide} />}
             {/* If state Show is true and state CreateOk is true = all fields is ok => show the modal with success message */}
             {show && created && <Modal contentModal="Employee Created!" hide={hide} />}
         </div >
