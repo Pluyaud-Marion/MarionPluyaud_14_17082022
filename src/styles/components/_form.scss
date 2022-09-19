@@ -41,6 +41,12 @@
         select {
             height: 30px;
         }
+
+        .error-date {
+            margin-top: 1px;
+            margin-bottom: 0;
+            font-style: italic;
+        }
     }
 
     .button-save {

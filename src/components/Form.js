@@ -44,6 +44,42 @@ const Form = () => {
         zipCode,
     }
 
+    const checkDate = () => {
+        const inputBirthday = document.querySelector("#date-of-birth").value
+        const date = inputBirthday.split("-")
+        const year = parseInt(date[0]);
+        const month = parseInt(date[1]);
+        const day = parseInt(date[2]);
+
+        const dateCurrent = new Date();
+        const yearCurrent = dateCurrent.getFullYear();
+        const monthCurrent = dateCurrent.getMonth() + 1;
+        const dayCurrent = dateCurrent.getDate()
+
+        const age = yearCurrent - year;
+
+        if (year > yearCurrent) {
+            document.querySelector(".error-date").innerHTML = "This date doesn't exist, there is an error"
+        } else if (yearCurrent === year && month > monthCurrent) {
+            document.querySelector(".error-date").innerHTML = "This date doesn't exist, there is an error"
+        } else if (yearCurrent === year && month === monthCurrent && day > dayCurrent) {
+            document.querySelector(".error-date").innerHTML = "This date doesn't exist, there is an error"
+        } else {
+            document.querySelector(".error-date").innerHTML = "This employee is too young, there is an error in the date"
+        }
+
+
+        if (year < yearCurrent) {
+            if (age < 18) {
+                document.querySelector(".error-date").innerHTML = "This employee is too young, there is an error in the date"
+            } else if (age > 70) {
+                document.querySelector(".error-date").innerHTML = "This employee is too old, there is an error in the date"
+            } else {
+                document.querySelector(".error-date").innerHTML = ""
+                return true
+            }
+        }
+    }
     // à l'envoi du formulaire, si un des champs est vide => création de l'employé n'a pas eu lieu = passage du state de createOk sur false et passage du state de setShow sur true
     /**
      * 
@@ -63,8 +99,7 @@ const Form = () => {
         const inputZipCode = document.querySelector("#zip-code").value
         const inputDepartment = document.querySelector("#department").value
 
-        console.log(inputDepartment);
-        console.log(inputState);
+
         if (!inputFirstname || !inputLastname || !inputBirthday || !inputStartDate || !inputStreet || !inputCity || !inputState || !inputZipCode || !inputDepartment) {
             setCreateOk(false)
             setShow(true)
@@ -99,7 +134,8 @@ const Form = () => {
                 <label htmlFor="lastName">Last Name</label>
                 <input onChange={(e) => setLastname(e.target.value)} type="text" id="lastName" required />
                 <label htmlFor="date-of-birth">Date of Birth</label>
-                <input onChange={(e) => setDateOfBirth(e.target.value)} type="date" id='date-of-birth' required />
+                <input onChange={(e) => [setDateOfBirth(e.target.value), checkDate()]} type="date" id='date-of-birth' required />
+                <p className='error-date'></p>
                 <label htmlFor="start-date">Start Date</label>
                 <input onChange={(e) => setStartDate(e.target.value)} type="date" id='start-date' required />
                 <fieldset className='address'>
